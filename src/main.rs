@@ -59,6 +59,9 @@ fn main() {
 
                     if game.lives == 0 {
                         game.status = String::from("You lost!!");
+                        let secret_word = hide_secret_word(&game.secret_word, &game.secret_word);
+                        update_screen(&game, &secret_word);
+                        break;
                     } else {
                         game.status = String::from("Wrong guess!");
                     }
@@ -132,7 +135,18 @@ fn check_user_guess(game: &Game, user_guess: char) -> UserGuessStatus {
 
 fn update_screen(game: &Game, secret_word: &String) {
     clear();
-    println!("HANGMAN: CAN YOU GUESS THE WORD?");
+    println!(
+        r"
+     _
+    | |
+    | |__   __ _ _ __   __ _ _ __ ___   __ _ _ __
+    | '_ \ / _` | '_ \ / _` | '_ ` _ \ / _` | '_ \
+    | | | | (_| | | | | (_| | | | | | | (_| | | | |
+    |_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|
+                        __/ |
+                       |___/"
+    );
+    println!("\nCAN YOU GUESS THE WORD?");
     println!(
         "Lives: {}. Discovered Letters: {}",
         game.lives, game.discovered_letters
