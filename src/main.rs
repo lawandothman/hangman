@@ -147,12 +147,112 @@ fn update_screen(game: &Game, secret_word: &String) {
                        |___/"
     );
     println!("\nCAN YOU GUESS THE WORD?");
+    print_hangman(game);
     println!(
         "Lives: {}. Discovered Letters: {}",
         game.lives, game.discovered_letters
     );
     println!("{}", secret_word);
     println!("{}", game.status);
+}
+
+fn print_hangman(game: &Game) {
+    match game.lives {
+        0 => {
+            println!(
+                r"
+            +---+
+            |   |
+            O   |
+           /|\  |
+           / \  |
+                |
+        =========
+            "
+            )
+        }
+        1 => {
+            println!(
+                r"
+            +---+
+            |   |
+            O   |
+           /|\  |
+           /    |
+                |
+        =========
+            "
+            )
+        }
+        2 => {
+            println!(
+                r"
+            +---+
+            |   |
+            O   |
+           /|\  |
+                |
+                |
+        =========
+            "
+            )
+        }
+        3 => {
+            println!(
+                "
+            +---+
+            |   |
+            O   |
+           /|   |
+                |
+                |
+        =========
+            "
+            )
+        }
+        4 => {
+            println!(
+                r"
+            +---+
+            |   |
+            O   |
+            |   |
+                |
+                |
+        =========
+        "
+            )
+        }
+        5 => {
+            println!(
+                "
+            +---+
+            |   |
+            O   |
+                |
+                |
+                |
+        =========
+            "
+            )
+        }
+        6 => {
+            println!(
+                r"
+            +---+
+            |   |
+                |
+                |
+                |
+                |
+        =========
+            "
+            )
+        }
+        _ => {
+            panic!("This shouldn't be possible")
+        }
+    }
 }
 
 fn clear() {
